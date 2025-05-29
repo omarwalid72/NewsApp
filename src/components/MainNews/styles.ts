@@ -1,47 +1,63 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  itemContainer: {
-    marginHorizontal: 8,
-  },
+ itemContainer: {
+  marginHorizontal: 8,
+  backgroundColor: '#111', // darker than black but allows shadow to show
+  borderRadius: 16,
+},
+
   imageBackground: {
-    width: 300,
-    height: 200,
+    width: 320,
+    height: 220,
     justifyContent: 'flex-end',
-    borderRadius: 12,
+    borderRadius: 16,
     overflow: 'hidden',
   },
   image: {
-    borderRadius: 12,
+    borderRadius: 16,
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    padding: 12,
+    backgroundColor: 'rgba(0, 0, 0, 0.35)',
+    padding: 14,
   },
   headline: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '700',
+    lineHeight: 24,
+    textShadowColor: 'rgba(0, 0, 0, 0.4)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   subtitle: {
-    color: '#eee',
-    fontSize: 14,
-    marginTop: 4,
+    color: '#ddd',
+    fontSize: 15,
+    marginTop: 6,
+    lineHeight: 20,
   },
   flatListContainer: {
-    marginTop: 20,
+    paddingHorizontal: 8,
+    paddingBottom: 20,
   },
-   addButton: {
-    backgroundColor: '#007bff',
-    padding: 12,
-    borderRadius: 8,
+  addButton: {
+    backgroundColor: '#1e90ff',
+    padding: 14,
+    borderRadius: 10,
     alignItems: 'center',
-    marginVertical: 16,
+    marginTop: 20,
     marginHorizontal: 16,
+    shadowColor: '#1e90ff',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6,
   },
   addButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: 'bold',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
 });

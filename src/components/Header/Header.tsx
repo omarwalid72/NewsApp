@@ -12,7 +12,7 @@ const Header = () => {
       />
 
       {/* Title */}
-      <Text style={styles.headerTitle}> News</Text>
+      <Text style={styles.headerTitle}>News App</Text>
 
       {/* Notification Icon */}
       <View style={styles.notificationWrapper}>

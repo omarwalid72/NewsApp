@@ -7,9 +7,11 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import {styles} from './styles'; // Make sure this path is correct
+import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {fetchNews} from '../../store/slices/mainNewsslice'; // Adjust the import path as necessary
+import {fetchNews} from '../../store/slices/mainNewsSlice';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import ScreenNames from '../../navigation/ScreenNames';
 
 type Article = {
   id: string;
@@ -22,14 +24,20 @@ type Article = {
 const MainNewsList = () => {
   const dispatch = useAppDispatch();
   const news = useAppSelector(state => state.mainNews);
+  const navigation = useNavigation<NavigationProp<MainStackParamList,ScreenNames.HomeScreen>>();
 
   useEffect(() => {
     dispatch(fetchNews());
   }, [dispatch]);
 
-  const renderItem = ({item}: {item: Article}) => (
+  const goToArticleDetails = (article: Article) => {
+    navigation.navigate(ScreenNames.ArticleDetails,{article});
+  };
+
+  const renderItem = ({item, index}: {item: Article; index: number}) => (
     <TouchableOpacity
-      onPress={() => console.log('Navigate to details:', item.url)}
+      key={item.id || `article-${index}`}
+      onPress={() => goToArticleDetails(item)}
       style={styles.itemContainer}>
       <ImageBackground
         source={{
@@ -40,8 +48,12 @@ const MainNewsList = () => {
         style={styles.imageBackground}
         imageStyle={styles.image}>
         <View style={styles.overlay}>
-          <Text style={styles.headline}>{item.title}</Text>
-          <Text style={styles.subtitle}>{item.description}</Text>
+          <Text style={styles.headline} numberOfLines={2} ellipsizeMode="tail">
+            {item.title}
+          </Text>
+          <Text style={styles.subtitle} numberOfLines={3} ellipsizeMode="tail">
+            {item.description}
+          </Text>
         </View>
       </ImageBackground>
     </TouchableOpacity>
@@ -70,7 +82,7 @@ const MainNewsList = () => {
       <FlatList
         data={news.articles}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => item.id || `article-${index}`}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled

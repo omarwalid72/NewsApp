@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: '#ffffff',
     elevation: 5,
+    marginBottom: 20,
   },
   profileImage: {
     width: 45,
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   notificationIcon: {
     width: 28,
-    height: 28,
+    height: 30,
   },
   badge: {
     position: 'absolute',

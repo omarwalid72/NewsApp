@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import {GetApiService} from '../../services/apiService';
 
 interface Source {
   id: string | null;
@@ -7,7 +8,7 @@ interface Source {
 }
 
 interface Article {
-    id: string;
+  id: string;
   source: Source;
   author: string | null;
   title: string;
@@ -18,11 +19,11 @@ interface Article {
   content: string;
 }
 
-interface NewsApiResponse {
-  status: string;
-  totalResults: number;
-  articles: Article[];
-}
+// interface NewsApiResponse {
+//   status: string;
+//   totalResults: number;
+//   articles: Article[];
+// }
 
 interface MainNewsState {
   articles: Article[];
@@ -39,11 +40,9 @@ const initialState: MainNewsState = {
 // Create async thunk for fetching news using axios
 export const fetchNews = createAsyncThunk(
   'mainNews/fetchNews',
-  async (_, { rejectWithValue }) => {
+  async (_, {rejectWithValue}) => {
     try {
-      const response = await axios.get<NewsApiResponse>(
-        'https://newsapi.org/v2/top-headlines?country=us&apiKey=6a7c9b908250426f94a9224edde63fdc'
-      );
+      const response = await GetApiService('/top-headlines?country=us');
       return response.data.articles;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -51,16 +50,16 @@ export const fetchNews = createAsyncThunk(
       }
       return rejectWithValue('An unknown error occurred');
     }
-  }
+  },
 );
 
 const mainNewsSlice = createSlice({
   name: 'mainNews',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(fetchNews.pending, (state) => {
+      .addCase(fetchNews.pending, state => {
         state.loading = true;
         state.error = null;
       })
