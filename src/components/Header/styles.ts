@@ -1,46 +1,47 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    headerContainer: {
+  headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    paddingVertical: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     backgroundColor: '#E3F0FB',
-    elevation: 5,
-    marginBottom: 20,
+    elevation: 3,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   profileImage: {
     width: 45,
     height: 45,
     borderRadius: 22.5,
+    borderWidth: 1,
+    borderColor: '#ccc',
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 22,
+    fontFamily: 'Cairo-Bold', // Cairo font
+    color: '#1F2937',
   },
   notificationWrapper: {
     position: 'relative',
-  },
-  notificationIcon: {
-    width: 28,
-    height: 30,
+    padding: 5,
   },
   badge: {
     position: 'absolute',
-    top: -6,
-    right: -6,
+    top: -4,
+    right: -4,
     backgroundColor: '#FF3B30',
-    borderRadius: 10,
-    paddingHorizontal: 5,
-    paddingVertical: 1,
+    borderRadius: 8,
+    minWidth: 16,
+    height: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   badgeText: {
     color: '#fff',
     fontSize: 10,
     fontWeight: 'bold',
   },
-   
 });

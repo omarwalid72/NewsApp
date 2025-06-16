@@ -3,6 +3,10 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+    backgroundColor: '#F9FAFB',
+  },
   itemContainer: {
     marginHorizontal: 8,
     backgroundColor: '#fff',

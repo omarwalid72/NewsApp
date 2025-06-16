@@ -1,6 +1,7 @@
-import {Text, View, Image} from 'react-native';
 import React from 'react';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Header = () => {
   return (
@@ -12,18 +13,15 @@ const Header = () => {
       />
 
       {/* Title */}
-      <Text style={styles.headerTitle}>News App</Text>
+      <Text style={styles.headerTitle}>اخبارك ايه</Text>
 
       {/* Notification Icon */}
-      <View style={styles.notificationWrapper}>
-        <Image
-          source={require('../../assets/images/R.jpg')}
-          style={styles.notificationIcon}
-        />
+      <TouchableOpacity style={styles.notificationWrapper}>
+        <Icon name="notifications-outline" size={28} color="#333" />
         <View style={styles.badge}>
           <Text style={styles.badgeText}>3</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

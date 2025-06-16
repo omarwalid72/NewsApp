@@ -6,7 +6,6 @@ import {fetchNews} from '../../store/slices/mainNewsSlice'; // Adjust the import
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {MainStackParamList} from '../../navigation/MainStack';
 import ScreenNames from '../../navigation/ScreenNames';
-import Icon from 'react-native-vector-icons/Feather';
 
 type Article = {
   id: string;

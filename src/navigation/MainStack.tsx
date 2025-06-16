@@ -3,6 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../Screens/HomeScreen/HomeScreen';
 import ArticalDetails from '../Screens/ArticalDetails/ArticalDetails';
 import ScreenNames from './ScreenNames';
+import AuthStack from './stacks/AuthStack';
+import MainTabs from './tabs/MainTabs';
 
 type Article = {
   id: string;
@@ -18,15 +20,22 @@ const MainStack = () => {
     <Stack.Navigator  screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={ScreenNames.HomeScreen} component={HomeScreen} />
-      <Stack.Screen name={ScreenNames.ArticleDetails} component={ArticalDetails} />
-    </Stack.Navigator>
+        <Stack.Screen
+          name={ScreenNames.Auth}
+          component={AuthStack}
+        />
+        <Stack.Screen
+          name={ScreenNames.MainTabs}
+          component={MainTabs}
+        />
+
+      </Stack.Navigator>
   );
 };
 
 export default MainStack;
 export type MainStackParamList = {
-  [ScreenNames.HomeScreen]: undefined;
-  [ScreenNames.ArticleDetails]: { article: Article };
+  [ScreenNames.Auth]: undefined;
+  [ScreenNames.MainTabs]: undefined;
   // };
 };

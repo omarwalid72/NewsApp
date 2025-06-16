@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -7,12 +7,13 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import { styles } from './styles';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchNews } from '../../store/slices/mainNewsSlice';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {Dimensions} from 'react-native';
+import {styles} from './styles';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {fetchNews} from '../../store/slices/mainNewsSlice';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import ScreenNames from '../../navigation/ScreenNames';
-import { MainStackParamList } from '../../navigation/MainStack';
+import {MainStackParamList} from '../../navigation/MainStack';
 
 type Article = {
   id: string;
@@ -22,12 +23,13 @@ type Article = {
   urlToImage?: string;
 };
 
-
-
 const MainNewsList = () => {
+  const {width} = Dimensions.get('window');
+  const ITEM_WIDTH = width * 0.8; // Adjust the width of each item
   const dispatch = useAppDispatch();
   const news = useAppSelector(state => state.mainNews);
-  const navigation = useNavigation<NavigationProp<MainStackParamList, ScreenNames.HomeScreen>>();
+  const navigation =
+    useNavigation<NavigationProp<MainStackParamList, ScreenNames.HomeScreen>>();
 
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,7 +44,7 @@ const MainNewsList = () => {
 
     const interval = setInterval(() => {
       const nextIndex = (currentIndex + 1) % news.articles.length;
-      flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
+      flatListRef.current?.scrollToIndex({index: nextIndex, animated: true});
       setCurrentIndex(nextIndex);
     }, 5000);
 
@@ -50,11 +52,13 @@ const MainNewsList = () => {
   }, [currentIndex, news.articles.length]);
 
   const goToArticleDetails = (article: Article) => {
-    navigation.navigate(ScreenNames.ArticleDetails, { article });
+    navigation.navigate(ScreenNames.ArticleDetails, {article});
   };
 
-  const renderItem = ({ item }: { item: Article }) => (
-    <TouchableOpacity onPress={() => goToArticleDetails(item)} style={styles.itemContainer}>
+  const renderItem = ({item}: {item: Article}) => (
+    <TouchableOpacity
+      onPress={() => goToArticleDetails(item)}
+      style={styles.itemContainer}>
       <ImageBackground
         source={{
           uri: item.urlToImage
@@ -64,16 +68,10 @@ const MainNewsList = () => {
         style={styles.imageBackground}
         imageStyle={styles.image}>
         <View style={styles.overlay}>
-          <Text
-            style={styles.headline}
-            numberOfLines={2}
-            ellipsizeMode="tail">
+          <Text style={styles.headline} numberOfLines={2} ellipsizeMode="tail">
             {item.title}
           </Text>
-          <Text
-            style={styles.subtitle}
-            numberOfLines={3}
-            ellipsizeMode="tail">
+          <Text style={styles.subtitle} numberOfLines={3} ellipsizeMode="tail">
             {item.description}
           </Text>
         </View>
@@ -98,7 +96,7 @@ const MainNewsList = () => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         ref={flatListRef}
         data={news.articles}
@@ -112,6 +110,11 @@ const MainNewsList = () => {
         initialNumToRender={3}
         windowSize={5}
         removeClippedSubviews
+        getItemLayout={(data, index) => ({
+          length: ITEM_WIDTH,
+          offset: ITEM_WIDTH * index,
+          index,
+        })}
       />
     </View>
   );

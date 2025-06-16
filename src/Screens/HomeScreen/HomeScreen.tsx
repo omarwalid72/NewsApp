@@ -1,4 +1,4 @@
-import {ScrollView,SafeAreaView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import React from 'react';
 import Header from '../../components/Header/Header';
 import MainNewsList from '../../components/MainNews/MainNews';
