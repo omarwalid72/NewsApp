@@ -1,6 +1,5 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const {width} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,42 +10,31 @@ export const styles = StyleSheet.create({
     position: 'relative',
     overflow: 'hidden',
   },
-  backgroundDecoration: {
-    position: 'absolute',
-    top: -100,
-    left: -50,
-    width: width + 100,
-    height: 200,
-    backgroundColor: '#E3F0FB',
-    borderBottomRightRadius: 50,
-    borderBottomLeftRadius: 150,
-    transform: [{rotate: '-5deg'}],
-    zIndex: -1,
-    opacity: 0.7,
-  },
-  backgroundCircle: {
-    position: 'absolute',
-    bottom: 0,
-    right: -50,
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    backgroundColor: '#E3F0FB',
-    zIndex: -1,
-    opacity: 0.4,
-  },
   headingRow: {
-    flexDirection: 'row',
-
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    marginVertical: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: '#E3F0FB',
+    borderRadius: 14,
+    shadowColor: '#000',
+    shadowOpacity: 0.08,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 6,
+    elevation: 3,
+    alignSelf: 'flex-end',
   },
   headingIcon: {
     marginRight: 8,
+    color: '#1F2937',
+    paddingLeft: 4,
   },
+
   heading: {
-    fontSize: 24,
+    fontSize: 18,
     fontFamily: 'Cairo-Bold',
     color: '#1F2937',
-    marginBottom: 16,
   },
 
   listContainer: {

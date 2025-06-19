@@ -6,6 +6,8 @@ import {fetchNews} from '../../store/slices/mainNewsSlice'; // Adjust the import
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {MainStackParamList} from '../../navigation/MainStack';
 import ScreenNames from '../../navigation/ScreenNames';
+import StackNames from '../../navigation/StackNames';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type Article = {
   id: string;
@@ -26,7 +28,10 @@ const TopNews = () => {
   }, [dispatch]);
 
   const goToArticleDetails = (article: Article) => {
-    navigation.navigate(ScreenNames.ArticleDetails, {article});
+    navigation.navigate(StackNames.SharedStack, {
+      screen: ScreenNames.ArticleDetails,
+      params: {article: article},
+    });
   };
 
   const renderItem = ({item, index}: {item: Article; index: number}) => (
@@ -54,7 +59,10 @@ const TopNews = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Top News</Text>
+      <View style={styles.headingRow}>
+      <Text style={styles.heading}>اخر الاخبار</Text>
+        <Ionicons name="newspaper" size={24} color="#1F2937" style={styles.headingIcon} />
+      </View>
       <FlatList
         data={topNews.articles} // Use fetched news or dummy data
         renderItem={renderItem}

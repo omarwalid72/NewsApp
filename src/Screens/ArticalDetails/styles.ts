@@ -89,6 +89,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Cairo-Bold',
   },
+  favoriteButton: {
+    borderRadius: 50,
+    padding: 8,
+    backgroundColor: '#3B82F6',
+  },
 });
 
 export default styles;

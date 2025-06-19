@@ -1,9 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import MainNewsReducer from './slices/mainNewsSlice';
+import FavoritesReducer from './slices/favoriteSlice';
 
 export const store = configureStore({
   reducer: {
     mainNews: MainNewsReducer, // Add your main news slice reducer here
+    favorites: FavoritesReducer, // Add your favorites slice reducer here
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

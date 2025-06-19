@@ -13,6 +13,8 @@ import {MainStackParamList} from '../../navigation/MainStack';
 import ScreenNames from '../../navigation/ScreenNames';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Feather';
+import { useAppDispatch } from '../../store/hooks';
+import { addFavorite } from '../../store/slices/favoriteSlice';
 
 const ArticleDetails = () => {
   const navigation = useNavigation();
@@ -24,6 +26,13 @@ const ArticleDetails = () => {
       Linking.openURL(article.url);
     }
   };
+  const dispatch = useAppDispatch();
+
+  const handleAddFavorite = () => {
+    dispatch(addFavorite(article));
+    // Optionally, you can show a confirmation message or update the UI
+    console.log('Article added to favorites:', article.title);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,7 +42,9 @@ const ArticleDetails = () => {
           <Icon name="arrow-left" size={24} color="#E3F0FB" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>تفاصيل الخبر</Text>
-        <View style={{width: 24}} /> {/* Placeholder for alignment */}
+        <TouchableOpacity  onPress={handleAddFavorite} style={styles.favoriteButton}>
+          <Icon name="heart" size={24} color="#E3F0FB" />
+        </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>

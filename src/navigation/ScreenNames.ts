@@ -9,7 +9,11 @@ enum ScreenNames {
   //Tab Screens
   MainTabs = 'MainTabs',
   Favorites = 'Favorites',
+  Settings = 'Settings',
 
 }
+
+
 export default ScreenNames;
+
 // This enum defines the screen names used in the navigation system of the application.

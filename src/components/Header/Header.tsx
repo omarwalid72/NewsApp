@@ -2,15 +2,26 @@ import React from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
+import ScreenNames from '../../navigation/ScreenNames';
+import StackNames from '../../navigation/StackNames';
 
 const Header = () => {
+  const navigation = useNavigation();
+  const goToSettings = () => {
+    navigation.navigate(StackNames.PublicStack, {
+      screen: ScreenNames.Settings,
+    });
+  };
   return (
     <View style={styles.headerContainer}>
       {/* Profile Image */}
+      <TouchableOpacity style={styles.profileImageWrapper} onPress={goToSettings}>
       <Image
         source={require('../../assets/images/boy.jpg')}
         style={styles.profileImage}
       />
+      </TouchableOpacity>
 
       {/* Title */}
       <Text style={styles.headerTitle}>اخبارك ايه</Text>

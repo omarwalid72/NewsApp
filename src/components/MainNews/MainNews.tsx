@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import {fetchNews} from '../../store/slices/mainNewsSlice';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import ScreenNames from '../../navigation/ScreenNames';
 import {MainStackParamList} from '../../navigation/MainStack';
+import StackNames from '../../navigation/StackNames';
 
 type Article = {
   id: string;
@@ -32,27 +33,19 @@ const MainNewsList = () => {
     useNavigation<NavigationProp<MainStackParamList, ScreenNames.HomeScreen>>();
 
   const flatListRef = useRef<FlatList>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     dispatch(fetchNews());
   }, [dispatch]);
 
-  // Auto scroll every 5 seconds
-  useEffect(() => {
-    if (news.articles.length === 0) return;
-
-    const interval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % news.articles.length;
-      flatListRef.current?.scrollToIndex({index: nextIndex, animated: true});
-      setCurrentIndex(nextIndex);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex, news.articles.length]);
+ 
 
   const goToArticleDetails = (article: Article) => {
-    navigation.navigate(ScreenNames.ArticleDetails, {article});
+    navigation.navigate(StackNames.SharedStack, {
+      screen: ScreenNames.ArticleDetails,
+      params: { article: article },
+    });
   };
 
   const renderItem = ({item}: {item: Article}) => (
