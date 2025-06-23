@@ -13,13 +13,16 @@ import {MainStackParamList} from '../../navigation/MainStack';
 import ScreenNames from '../../navigation/ScreenNames';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Feather';
-import { useAppDispatch } from '../../store/hooks';
-import { addFavorite } from '../../store/slices/favoriteSlice';
+import IonicIcons from 'react-native-vector-icons/Ionicons';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { addFavorite, removeFavorite } from '../../store/slices/favoriteSlice';
 
 const ArticleDetails = () => {
   const navigation = useNavigation();
-  const {params} = useRoute<RouteProp<MainStackParamList, ScreenNames.ArticleDetails>>();
-  const {article} = params;
+  const route = useRoute<RouteProp<MainStackParamList, ScreenNames.ArticleDetails>>();
+  const { article } = route.params;
+  const favorites = useAppSelector(state => state.favorites.favorites);
+  const isFavorited = favorites.some(fav => fav.url === article.url);
 
   const handleReadMore = () => {
     if (article.url) {
@@ -28,10 +31,12 @@ const ArticleDetails = () => {
   };
   const dispatch = useAppDispatch();
 
-  const handleAddFavorite = () => {
-    dispatch(addFavorite(article));
-    // Optionally, you can show a confirmation message or update the UI
-    console.log('Article added to favorites:', article.title);
+  const handleFavoritePress = () => {
+    if (isFavorited) {
+      dispatch(removeFavorite(article.url)); // Assuming you have a removeFavorite action
+    } else {
+      dispatch(addFavorite(article));
+    }
   };
 
   return (
@@ -42,8 +47,15 @@ const ArticleDetails = () => {
           <Icon name="arrow-left" size={24} color="#E3F0FB" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>تفاصيل الخبر</Text>
-        <TouchableOpacity  onPress={handleAddFavorite} style={styles.favoriteButton}>
-          <Icon name="heart" size={24} color="#E3F0FB" />
+        <TouchableOpacity onPress={handleFavoritePress} style={[
+          styles.favoriteButton,
+          isFavorited && styles.favoritedButton
+        ]}>
+          <IonicIcons
+            name={isFavorited ? 'heart' : 'heart-outline'}
+            size={24}
+            color={isFavorited ? '#E3F0FB' : '#E3F0FB'}
+          />
         </TouchableOpacity>
       </View>
 

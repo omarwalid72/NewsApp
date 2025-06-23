@@ -4,8 +4,9 @@ const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
+    marginTop: 10,
     paddingTop: 20,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#f0f0f0',
   },
   itemContainer: {
     marginHorizontal: 8,
@@ -19,8 +20,8 @@ export const styles = StyleSheet.create({
   },
 
   imageBackground: {
-    width: width * 0.85,
-    height: 220,
+    width: width * 0.5,
+    height: 200,
     justifyContent: 'flex-end',
     borderRadius: 16,
     overflow: 'hidden',

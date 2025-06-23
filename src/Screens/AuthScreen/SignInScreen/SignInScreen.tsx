@@ -18,7 +18,7 @@ const SignInScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    if(email === 'omar' && password === '1234'){
+    if(email === '' && password === ''){
       navigation.navigate(StackNames.MainTabs);
     }
     else {

@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <View style={styles.headerContainer}>
       {/* Profile Image */}
-      <TouchableOpacity style={styles.profileImageWrapper} onPress={goToSettings}>
+      <TouchableOpacity  onPress={goToSettings}>
       <Image
         source={require('../../assets/images/boy.jpg')}
         style={styles.profileImage}

@@ -45,6 +45,15 @@ const styles = StyleSheet.create({
     color: '#4B5563',
     textAlign: 'right',
   },
+ favoriteButton: {
+  position: 'absolute',
+  top: 12,
+  left: 12,
+  zIndex: 10,
+  backgroundColor: '#3B82F6',
+  borderRadius: 20,
+  padding: 6,
+},
 });
 
 export default styles;
