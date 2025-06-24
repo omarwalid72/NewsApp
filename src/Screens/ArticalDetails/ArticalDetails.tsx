@@ -20,7 +20,7 @@ import { addFavorite, removeFavorite } from '../../store/slices/favoriteSlice';
 const ArticleDetails = () => {
   const navigation = useNavigation();
   const route = useRoute<RouteProp<MainStackParamList, ScreenNames.ArticleDetails>>();
-  const { article } = route.params;
+  const { article } = (route.params as { article: any });
   const favorites = useAppSelector(state => state.favorites.favorites);
   const isFavorited = favorites.some(fav => fav.url === article.url);
 
@@ -49,7 +49,7 @@ const ArticleDetails = () => {
         <Text style={styles.headerTitle}>تفاصيل الخبر</Text>
         <TouchableOpacity onPress={handleFavoritePress} style={[
           styles.favoriteButton,
-          isFavorited && styles.favoritedButton
+          isFavorited && styles.favoriteButton,
         ]}>
           <IonicIcons
             name={isFavorited ? 'heart' : 'heart-outline'}

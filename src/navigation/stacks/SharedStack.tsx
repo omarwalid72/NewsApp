@@ -1,7 +1,7 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
-import ArticalDetails from "../../Screens/ArticalDetails/ArticalDetails";
-import ScreenNames from "../ScreenNames";
+import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import ArticalDetails from '../../Screens/ArticalDetails/ArticalDetails';
+import ScreenNames from '../ScreenNames';
 
 const Stack = createStackNavigator();
 const SharedStack = () => {

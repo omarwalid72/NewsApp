@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
 import MainNewsReducer from './slices/mainNewsSlice';
 import FavoritesReducer from './slices/favoriteSlice';
+import AuthReducer from './slices/authSlice';
 
 export const store = configureStore({
   reducer: {
     mainNews: MainNewsReducer, // Add your main news slice reducer here
+    auth: AuthReducer, // Add your auth slice reducer here
     favorites: FavoritesReducer, // Add your favorites slice reducer here
   },
   middleware: getDefaultMiddleware =>
